@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wangzhi/spear/ab.cc
+ab.h
+/home/wangzhi/spear/ab.h
+
+/home/wangzhi/spear/ab.h
+infiniband/verbs.h
+-
+vector
+-
+iostream
+-
+memory
+-
+assert.h
+-
+algorithm
+-
+

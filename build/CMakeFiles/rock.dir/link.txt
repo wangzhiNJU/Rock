@@ -1,0 +1,2 @@
+/usr/bin/ar cq librock.a  CMakeFiles/rock.dir/ab.cc.o
+/usr/bin/ranlib librock.a
