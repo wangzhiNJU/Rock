@@ -27,14 +27,9 @@ class Connector
 public:
   Connector(RockContext *ir) : rct(ir), app_req_size(ir.app_req_size), name("@Connector:") {}
   ~Connector() {}
-  void add_client(int fd)
+  void add_client(int fd, uint32_t pid)
   {
     center.add_event(fd, accept_request);
-    char buf[25];
-    ssize_t n = read(fd, buf, 25);
-    assert(n >= 0);
-    uint32_t pid = 0;
-    sscanf(buf, "%010u", &pid);
     std::lock_guard<std::mutex> m(mutex);
     assert(local_map.find(pid) == local_map.end());
     local_map[pid] = fd;

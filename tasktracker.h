@@ -42,6 +42,7 @@ class TaskTracker
   RockContext* rct;
   std::map<Target, Worker*> book;
   std::vector<Worker> workers;
+  std::map<uint32_t, AppShmInfo*> ;//pid : shared memory info of applications
   std::mutex mutex;
 public:
   TaskTracker(RockContext* ir):rct(ir) {

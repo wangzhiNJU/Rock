@@ -9,9 +9,10 @@ class Connection
   char *wr_shm;
   char *cqe_shm;
   uint32_t vqpn;
+  Chunk* reqs;
 
 public:
-  Connection(uint32_t);
+  Connection(uint32_t, Chunk*);
   int get_wr_fd()
   {
     return wr_fd;
@@ -28,7 +29,7 @@ class App_Connector
   std::set<Connection> connected_conns;
   std::mutex mutex;
 public:
-  App_Connector(App_Context *ia) : act(id), name("@App_Connector") {}
+  App_Connector(App_Context *ia) : act(id), name("@App_Connector:") {}
   void add_conns(Connection& c) {
     std::lock_guard<std::mutex> m(mutex);
     connected_conns.add(c);
@@ -52,7 +53,7 @@ class Proxy
   App_Connector app_connector;
   std::map<uint32_t, int> poster;
 public:
-  Proxy(App_Context *ia) : act(ia), worker(run), name("@Proxy"), done(true), app_fd(-1),
+  Proxy(App_Context *ia) : act(ia), worker(run), name("@Proxy:"), done(true), app_fd(-1),
                            pid(getpid()), local_counter(0), app_req_size(ia.app_req_size),
                            app_connector(ia) {}
   int start();

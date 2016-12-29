@@ -20,7 +20,7 @@ int IPC::unix_socket_listen(const char *name)
   strcpy(un.sun_path, name);
   len = offsetof(struct sockaddr_un, sun_path) + strlen(name);
 
-  if (bind(fd, (struct socket_addr *)&un, len) < 0)
+  if (bind(fd, (struct sockaddr *)&un, len) < 0)
   {
     rval = -3;
     goto errout;
@@ -49,7 +49,7 @@ int IPC::unix_socket_accept(int listen_fd, uid_t *uidptr)
   if ((name = malloc(sizeof(un.sun_path) + 1)) == nullptr)
     return -1;
   len = sizeof(un);
-  if ((clifd = accept(listen_fd, (struct socket_addr *)&un, &len)) < 0)
+  if ((clifd = accept(listen_fd, (struct sockaddr *)&un, &len)) < 0)
   {
     free(name);
     return -2;
@@ -94,7 +94,7 @@ errout:
 int IPC::set_nonblock(int fd)
 {
   int flags;
-  if ((flags = fcntl(fd, FGETFL)) < 0)
+  i if ((flags = fcntl(fd, FGETFL)) < 0)
   {
     LOG_IF(INFO, rct->loglevel > 1) << __func__ << name << " get flags error.";
     return -1;
@@ -151,7 +151,7 @@ int IPC::unix_socket_connect(const char *client_path, const char *server_path)
   struct sockaddr_un un, sun;
   bool do_unlink = false;
 
-  if ((fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+  if ((fd = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
     RETURN - 1;
 
   un.sun_family = AF_UNIX;
@@ -186,7 +186,7 @@ errout:
 
 int send_fd(int fd, int fd_to_send) //copy from apue
 {
-  strcut iovec iov[1];
+  struct iovec iov[1];
   struct msghdr msg;
   char buf[2];
   iov[0].iov_base = buf;
@@ -227,6 +227,11 @@ int recv_fd(int fd)
   msg.msg_name = nullptr;
   msg.msg_namelen = 0;
   assert(cmptr != nullptr);
+  msg.msg_control = cmptr;
+  msg.msg_controllen = cm_len;
+  cmptr->cmsg_len = msg.msg_controllen;
+  cmptr->cmsg_level = SOL_SOCKET;
+  cmptr->cmsg_type = SCM_RIGHTS;
   if ((nr = recvmsg(fd, &msg, 0)) < 0)
     return -1;
   else if (nr == 0)
@@ -236,8 +241,6 @@ int recv_fd(int fd)
 
   if (nr == 2 && buf[0] == buf[1] && buf[0] == 0)
   {
-    if (ptr != &buf[nr - 1])
-      assert(0);
     if (msg.msg_controllen < cm_len)
       assert(0);
     newfd = *(int *)CMSG_DATA(cmptr);
@@ -245,8 +248,6 @@ int recv_fd(int fd)
   else
     assert(0);
 
-  if (nr > 0 && func(buf, nr) != nr)
-    return -1;
   if (status >= 0)
     return newfd;
 }

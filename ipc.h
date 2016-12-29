@@ -17,7 +17,7 @@ class IPC
   int cm_len;
   struct cmsghdr *cmptr; //used to send fd
 public:
-  IPC(RockContext *ir) : rct(ir), name("@IPC"), cm_len(CMSG_LEN(sizeof(int))),
+  IPC(RockContext *ir) : rct(ir), name("@IPC:"), cm_len(CMSG_LEN(sizeof(int))),
                          cmptr(malloc(cm_len)) {}
   ~IPC()
   {

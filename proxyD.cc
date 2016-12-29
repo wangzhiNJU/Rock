@@ -15,11 +15,17 @@ ProxyD::run()
 {
   done = false;
   int new_fd;
-  char buf[25];
+  char buf[128];
+  uint32_t pid, ctlkey, bufkey;
   while (!done)
   {
     new_fd = ipc.unix_socket_accept(listener_fd, nullptr);
-    connector.add_client(new_fd);
+    ssize_t n = read(fd, buf, 128);
+    assert(n >= 30);
+    sscanf(buf, "%010u%010u%010u", &pid, &ctlkey, &bufkey);
+    connector.add_client(new_fd, pid);
+    AppShmInfo* info = new AppShmInfo(rct, (key_t)ctlkey, (key_t)bufkey, pid);
+    apps_mm.add(info);
   }
 }
 
