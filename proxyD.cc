@@ -4,14 +4,14 @@
 #include "ipc.h"
 #include "proxyD.h"
 
-ProxyD::start()
+int ProxyD::start()
 {
   listener_fd = ipc.unix_socket_listen("./conf/server_socket");
   assert(listener_fd >= 0);
   worker.join();
 }
 
-ProxyD::run()
+void ProxyD::run()
 {
   done = false;
   int new_fd;
@@ -20,12 +20,12 @@ ProxyD::run()
   while (!done)
   {
     new_fd = ipc.unix_socket_accept(listener_fd, nullptr);
-    ssize_t n = read(fd, buf, 128);
+    ssize_t n = read(new_fd, buf, 128);
     assert(n >= 30);
     sscanf(buf, "%010u%010u%010u", &pid, &ctlkey, &bufkey);
-    connector.add_client(new_fd, pid);
+    connector->add_client(new_fd, pid);
     AppShmInfo* info = new AppShmInfo(rct, (key_t)ctlkey, (key_t)bufkey, pid);
-    apps_mm.add(info);
+    apps_mm->add(pid, info);
   }
 }
 
@@ -44,7 +44,7 @@ void Connector::accept_request(int fd)
       loginfo(1) << " read failed"; //this fd go wrong
   }
 
-  if (offset == app_req_size)
+  if (r == app_req_size)
     parse_app_req(buf, fd);
   loginfo(1) << " uncomplete msg.";
 }
@@ -62,7 +62,7 @@ void Connector::process_request(int fd)
     }
     else if (n == -1)
     {
-      if (errno == EAGAIN || errno == EINTER)
+      if (errno == EAGAIN || errno == EINTR)
       {
         loginfo(1) << " not enough data.";
         return;
@@ -103,7 +103,7 @@ void Connector::build_qp(int fd, int type)
     qp = bridges[fd];
   }
   assert(qp);
-  int r = qp->activate(peer);
+  r = qp->activate(peer);
   assert(r == 0);
   if (type == BUILD_QP_RSP)
   {
@@ -119,11 +119,11 @@ void Connector::build_qp(int fd, int type)
         assert(0);
       }
       auto it = connecting_qps.equal_range(t);
-      ids = new int[n * 2];
-      for (int i = 0; it.first != it.end(); ++it.first)
+      ids = new uint32_t[n * 2];
+      for (int i = 0; it.first != it.second; ++it.first)
       {
-        id[i++] = (it.first)->get_pid();
-        id[i++] = (it.first)->get_key();
+        ids[i++] = (it.first)->get_pid();
+        ids[i++] = (it.first)->get_key();
       }
     }
     send_req_vqpns(fd, t, ids, n);
@@ -133,7 +133,7 @@ void Connector::build_qp(int fd, int type)
     //send local syn back
     char buf[3 + SYN_LEN];
     sprintf(buf, "%03d", BUILD_QP_RSP);
-    ib->get_syn_msg(buf + 3, qp->get_local_syn());
+    ib->get_wire_from_msg(buf + 3, qp->get_local_syn());
     write(fd, buf, SYN_LEN);
   }
 }
@@ -191,9 +191,13 @@ void Connector::opt_vqpn_rsp(int fd)
     app_fd = iter->second;
   }
   write(app_fd, buf, 33);
-  int wr_fd = ipc.recv_fd(app_fd);
-  task_tracker.dispatch(t, vqpn, wr_fd);
- // int cqe_fd = ipc.recv_fd(app_fd);
+  char buffer[21];
+  int fds[2];
+  int wr_fd = ipc.recv_fd(app_fd, fds, 2 ,buffer);
+  int i, j;
+  sscanf(buffer, "%010d%010d", &i, &j);
+  tasktracker->dispatch(t, vqpn, fds[0], apps_mm->get_ctl_addr(pid, i));
+  poller->dispatch(vqpn, fds[1], apps_mm->get_ctl_addr(pid, j));
 }
 
 void Connector::parse_app_req(char *buf, int fd) // type:1 pid:10 key:10 peer_addr:22
@@ -205,7 +209,7 @@ void Connector::parse_app_req(char *buf, int fd) // type:1 pid:10 key:10 peer_ad
   sscanf(buf, "%c%010u%010u%s", &type, &pid, &key, addr);
 
   if (type == 'c') //close connection
-    close_connection();
+    close_connection(pid, key);
   if (type != 'n') // != new connection
     assert(0);
 
@@ -216,10 +220,10 @@ void Connector::parse_app_req(char *buf, int fd) // type:1 pid:10 key:10 peer_ad
     loginfo(1) << " parse addr failed.";
     return;
   }
-  try_build_tcp(t);
+  try_build_tcp(t, fd);
 }
 
-void Connector::try_build_tcp(Target &t)
+void Connector::try_build_tcp(Target &t, int fd)
 {
   bool ea = false, eb = false;
   {
@@ -247,25 +251,26 @@ void Connector::try_build_tcp(Target &t)
     this->add_remote(fd, t);
     char buf[3 + SYN_LEN];
     sprintf(buf, "%03d", BUILD_QP_REQ);
-    ib->get_syn_msg(buf + 3, qp->get_local_syn());
+    ib->get_wire_from_msg(buf + 3, qp->get_local_syn());
     write(fd, buf, SYN_LEN);
     return;
   }
   uint32_t id[2] = {t.get_pid(), t.get_key()};
-  req_vqpns(fd, t, &id, 1);
+  send_req_vqpns(fd, t, id, 1);
 }
 
 int Connector::send_req_vqpns(int fd, Target &t, uint32_t *id, int n)
 {
   uint32_t buf[n];
-  int r = choose_vqpns(t, &buf, n);
+  int r = choose_vqpns(t, buf, n);
   if (r < 0)
     loginfo(1) << +" failed to choose vqpn";
 
   size_t len = 18 * n + 1;
   char out[len];
   char *s;
-  for (s = out, int i = 0; i < n; i += 2)
+  int i;
+  for (s = out, i = 0; i < n; i += 2)
   {
     sprintf(s, "%03d%010u%010u%010u", OPT_VQPN_REQ, buf[i], id[i], id[i + 1]);
     s += 18;
@@ -284,7 +289,7 @@ int Connector::send_req_vqpns(int fd, Target &t, uint32_t *id, int n)
 void Acceptor::start()
 {
   Target t;
-  bool tb = t.parse(rct.listen_host);
+  bool tb = t.parse(rct->listen_host);
   assert(tb);
   int fd = ipc.create_socket(t.get_family());
   assert(fd >= 0);
@@ -297,20 +302,7 @@ void Acceptor::start()
   {
     new_fd = ::accept(fd, &addr, &addr_len); //
     Target t;
-    t.set_sockaddr(addr);
-    bool exist = false;
-    ;
-    {
-      std::lock_guard<std::mutex> m(mutex);
-      if (connected_qps.find(t) != connected_qps.end() ||
-          connecting_qps.find(t) != connecting_qps.end())
-        exist = true;
-    }
-    if (exist)
-      close(new_fd); //means that peer already open an fd to here
-    else
-    {
-      connector.add_remote(new_fd, t);
-    }
+    t.set_sockaddr(&addr);
+    connector->add_remote(new_fd, t);
   }
 }

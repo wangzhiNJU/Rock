@@ -7,6 +7,7 @@
 #include <memory>
 #include <assert.h>
 #include <algorithm>
+#include "RockContext.h"
 
 using std::vector;
 using std::string;
@@ -72,7 +73,7 @@ class Device {
 
 class DeviceList {
   RockContext* rct;
-  vector<unique_ptr<Device> > devices;
+  vector<Device*> devices;
   ibv_device** device_list;
   int num;
  public:
@@ -84,7 +85,7 @@ class DeviceList {
     for(auto& d : devices)
       d->debug();
   }
+  Device* get_device(const char*);
 };
-
 
 #endif

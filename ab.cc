@@ -33,7 +33,15 @@ DeviceList::DeviceList(RockContext* ir) : rct(ir), device_list(ibv_get_device_li
   assert(device_list && num != 0);
 
   for(int i = 0; i < num; ++i) {
-    unique_ptr<Device> td(new Device(ir, device_list[i]));
-    devices.push_back(std::move(td));  
+    devices.push_back(new Device(ir, device_list[i]));  
   }
+}
+
+Device* DeviceList::get_device(const char* target) {
+  auto it = devices.begin();
+  for(; it != devices.end(); ++it) {
+    if(strcmp((*it)->get_name().c_str(), target) == 0)
+      return *it;
+  }
+  return nullptr;
 }

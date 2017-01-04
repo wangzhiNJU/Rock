@@ -1,12 +1,12 @@
 #include "event.h"
 
-int EventCenter::add_event(int fd, std::function<void(int)> func)
+int EventCenter::add_event(int fd, Callback* callback)
 {
   if (file_events.find(fd) != file_events.end())
     assert(0);
   {
     std::lock_guard<std::mutex> lock(mutex);
-    file_events[fd] = func;
+    file_events[fd] = callback;
   }
 
   struct epoll_event ee;
@@ -31,8 +31,8 @@ int EventCenter::process_events()
     for(i = 0; i < retval; ++i)
     {
       tpfd = events[i].data.fd;
-      std::function<void(int)> &f = file_events[tpfd];
-      f(tpfd);
+      Callback* f = file_events[tpfd];
+      f->callback(tpfd);
     }
   }
 }

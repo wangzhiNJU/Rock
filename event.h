@@ -1,17 +1,18 @@
 #ifndef EVENT_H
 #define EVENT_H
 #include <sys/epoll.h>
+#include "RockContext.h"
 
 class EventCenter {
-  Context* rct;
+  RockContext* rct;
   int epfd;
   struct epoll_event* events;
   int nevent;
-  std::map<int, std::function<void(int)> > file_events;
+  std::map<int, Callback*> file_events;
   std::mutex mutex;
   bool done;
  public:
-  EventCenter(Context* ir, int in = 1000) : rct(ir), nevent(in), done(false) {
+  EventCenter(RockContext* ir, int in = 1000) : rct(ir), nevent(in), done(false) {
     epfd = epoll_create1(0);
     assert(epfd != -1);
 
@@ -20,7 +21,7 @@ class EventCenter {
   ~EventCenter() {
     delete[] events;
   }
-  int add_event(int fd, std::function<void(int)> func);
+  int add_event(int fd, Callback*);
   int del_event();
   int process_events();
 };

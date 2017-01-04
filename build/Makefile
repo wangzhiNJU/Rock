@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/wangzhi/spear
+CMAKE_SOURCE_DIR = /root/Rock
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/wangzhi/spear/build
+CMAKE_BINARY_DIR = /root/Rock/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wangzhi/spear/build/CMakeFiles /home/wangzhi/spear/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Rock/build/CMakeFiles /root/Rock/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wangzhi/spear/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Rock/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -150,6 +150,168 @@ ab.cc.s:
 	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/ab.cc.s
 .PHONY : ab.cc.s
 
+event.o: event.cc.o
+
+.PHONY : event.o
+
+# target to build an object file
+event.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/event.cc.o
+.PHONY : event.cc.o
+
+event.i: event.cc.i
+
+.PHONY : event.i
+
+# target to preprocess a source file
+event.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/event.cc.i
+.PHONY : event.cc.i
+
+event.s: event.cc.s
+
+.PHONY : event.s
+
+# target to generate assembly for a file
+event.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/event.cc.s
+.PHONY : event.cc.s
+
+ipc.o: ipc.cc.o
+
+.PHONY : ipc.o
+
+# target to build an object file
+ipc.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/ipc.cc.o
+.PHONY : ipc.cc.o
+
+ipc.i: ipc.cc.i
+
+.PHONY : ipc.i
+
+# target to preprocess a source file
+ipc.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/ipc.cc.i
+.PHONY : ipc.cc.i
+
+ipc.s: ipc.cc.s
+
+.PHONY : ipc.s
+
+# target to generate assembly for a file
+ipc.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/ipc.cc.s
+.PHONY : ipc.cc.s
+
+poller.o: poller.cc.o
+
+.PHONY : poller.o
+
+# target to build an object file
+poller.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/poller.cc.o
+.PHONY : poller.cc.o
+
+poller.i: poller.cc.i
+
+.PHONY : poller.i
+
+# target to preprocess a source file
+poller.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/poller.cc.i
+.PHONY : poller.cc.i
+
+poller.s: poller.cc.s
+
+.PHONY : poller.s
+
+# target to generate assembly for a file
+poller.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/poller.cc.s
+.PHONY : poller.cc.s
+
+proxyD.o: proxyD.cc.o
+
+.PHONY : proxyD.o
+
+# target to build an object file
+proxyD.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/proxyD.cc.o
+.PHONY : proxyD.cc.o
+
+proxyD.i: proxyD.cc.i
+
+.PHONY : proxyD.i
+
+# target to preprocess a source file
+proxyD.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/proxyD.cc.i
+.PHONY : proxyD.cc.i
+
+proxyD.s: proxyD.cc.s
+
+.PHONY : proxyD.s
+
+# target to generate assembly for a file
+proxyD.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/proxyD.cc.s
+.PHONY : proxyD.cc.s
+
+queues.o: queues.cc.o
+
+.PHONY : queues.o
+
+# target to build an object file
+queues.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/queues.cc.o
+.PHONY : queues.cc.o
+
+queues.i: queues.cc.i
+
+.PHONY : queues.i
+
+# target to preprocess a source file
+queues.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/queues.cc.i
+.PHONY : queues.cc.i
+
+queues.s: queues.cc.s
+
+.PHONY : queues.s
+
+# target to generate assembly for a file
+queues.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/queues.cc.s
+.PHONY : queues.cc.s
+
+tasktracker.o: tasktracker.cc.o
+
+.PHONY : tasktracker.o
+
+# target to build an object file
+tasktracker.cc.o:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/tasktracker.cc.o
+.PHONY : tasktracker.cc.o
+
+tasktracker.i: tasktracker.cc.i
+
+.PHONY : tasktracker.i
+
+# target to preprocess a source file
+tasktracker.cc.i:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/tasktracker.cc.i
+.PHONY : tasktracker.cc.i
+
+tasktracker.s: tasktracker.cc.s
+
+.PHONY : tasktracker.s
+
+# target to generate assembly for a file
+tasktracker.cc.s:
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/tasktracker.cc.s
+.PHONY : tasktracker.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +324,24 @@ help:
 	@echo "... ab.o"
 	@echo "... ab.i"
 	@echo "... ab.s"
+	@echo "... event.o"
+	@echo "... event.i"
+	@echo "... event.s"
+	@echo "... ipc.o"
+	@echo "... ipc.i"
+	@echo "... ipc.s"
+	@echo "... poller.o"
+	@echo "... poller.i"
+	@echo "... poller.s"
+	@echo "... proxyD.o"
+	@echo "... proxyD.i"
+	@echo "... proxyD.s"
+	@echo "... queues.o"
+	@echo "... queues.i"
+	@echo "... queues.s"
+	@echo "... tasktracker.o"
+	@echo "... tasktracker.i"
+	@echo "... tasktracker.s"
 .PHONY : help
 
 

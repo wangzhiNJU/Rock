@@ -3,32 +3,27 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <time.h>
+#include "RockContext.h"
 
 class Target;
-bool operator<(const Target &a, const Target &b)
-{
-  return a.less(b);
-}
-
 class IPC
 {
   RockContext *rct;
   string name;
-  int cm_len;
-  struct cmsghdr *cmptr; //used to send fd
 public:
-  IPC(RockContext *ir) : rct(ir), name("@IPC:"), cm_len(CMSG_LEN(sizeof(int))),
-                         cmptr(malloc(cm_len)) {}
+  IPC(RockContext *ir) : rct(ir), name("@IPC:") {}
   ~IPC()
   {
-    free(cmptr]);
   }
   int unix_socket_listen(const char *);
   int unix_socket_accept(int, uid_t *);
   int connect(Target &t);
   int unix_socket_connect(const char *, const char *);
-  int send_fd(int, int;
-  int recv_fd(int);
+  int send_fd(int, int*, int, void*);
+  int recv_fd(int, int*, int, char*);
+  int set_nonblock(int);
+  int create_socket(int);
+  int init_server(Target&);
 };
 
 class Target
@@ -46,11 +41,11 @@ public:
   {
     memset(&u, 0, sizeof(u));
   }
-  uint32_t get_pid()
+  uint32_t get_pid() const
   {
     return pid;
   }
-  uint32_t get_key()
+  uint32_t get_key() const
   {
     return key;
   }
@@ -60,11 +55,9 @@ public:
     {
     case AF_INET:
       memcpy(&u.sin, sa, sizeof(u.sin));
-      addr_len = sizeof(u.sin);
       break;
     case AF_INET6:
       memcpy(&u.sin6, sa, sizeof(u.sin6));
-      addr_len = sizeof(u.sin6);
       break;
     default:
       return false;
@@ -121,7 +114,6 @@ public:
     if (inet_pton(AF_INET, buf4, &a4))
     {
       u.sin.sin_addr.s_addr = a4.s_addr;
-      cout << __func__ << u.sin.sin_addr.s_addr << endl;
       u.sa.sa_family = AF_INET;
       p = s + strlen(buf4);
     }
@@ -200,7 +192,7 @@ public:
       return wire_addr;
 
     char buf[25];
-    const char *ptr = inet_ntop(AF_INET, &u, sin.sin_addr, 25);
+    const char *ptr = inet_ntop(AF_INET, &u.sin.sin_addr, buf,25);
     assert(ptr);
     int len = strlen(buf);
     sprintf(buf + len, ":%d", get_port());
@@ -209,4 +201,9 @@ public:
     return tmp;
   }
 };
+
+bool operator<(const Target &a, const Target &b)
+{
+  return a.less(b);
+}
 #endif

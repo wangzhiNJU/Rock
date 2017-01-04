@@ -1,1 +1,1 @@
-/home/wangzhi/spear/build/CMakeFiles/rock.dir
+/root/Rock/build/CMakeFiles/rock.dir

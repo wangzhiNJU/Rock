@@ -43,10 +43,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/wangzhi/spear
+CMAKE_SOURCE_DIR = /root/Rock
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/wangzhi/spear/build
+CMAKE_BINARY_DIR = /root/Rock/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/rock.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/rock.dir/flags.make
 
 CMakeFiles/rock.dir/ab.cc.o: CMakeFiles/rock.dir/flags.make
 CMakeFiles/rock.dir/ab.cc.o: ../ab.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wangzhi/spear/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rock.dir/ab.cc.o"
-	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/ab.cc.o -c /home/wangzhi/spear/ab.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rock.dir/ab.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/ab.cc.o -c /root/Rock/ab.cc
 
 CMakeFiles/rock.dir/ab.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/ab.cc.i"
-	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/wangzhi/spear/ab.cc > CMakeFiles/rock.dir/ab.cc.i
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/ab.cc > CMakeFiles/rock.dir/ab.cc.i
 
 CMakeFiles/rock.dir/ab.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/ab.cc.s"
-	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/wangzhi/spear/ab.cc -o CMakeFiles/rock.dir/ab.cc.s
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/ab.cc -o CMakeFiles/rock.dir/ab.cc.s
 
 CMakeFiles/rock.dir/ab.cc.o.requires:
 
@@ -81,17 +81,173 @@ CMakeFiles/rock.dir/ab.cc.o.provides: CMakeFiles/rock.dir/ab.cc.o.requires
 CMakeFiles/rock.dir/ab.cc.o.provides.build: CMakeFiles/rock.dir/ab.cc.o
 
 
+CMakeFiles/rock.dir/event.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/event.cc.o: ../event.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rock.dir/event.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/event.cc.o -c /root/Rock/event.cc
+
+CMakeFiles/rock.dir/event.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/event.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/event.cc > CMakeFiles/rock.dir/event.cc.i
+
+CMakeFiles/rock.dir/event.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/event.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/event.cc -o CMakeFiles/rock.dir/event.cc.s
+
+CMakeFiles/rock.dir/event.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/event.cc.o.requires
+
+CMakeFiles/rock.dir/event.cc.o.provides: CMakeFiles/rock.dir/event.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/event.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/event.cc.o.provides
+
+CMakeFiles/rock.dir/event.cc.o.provides.build: CMakeFiles/rock.dir/event.cc.o
+
+
+CMakeFiles/rock.dir/ipc.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/ipc.cc.o: ../ipc.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/rock.dir/ipc.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/ipc.cc.o -c /root/Rock/ipc.cc
+
+CMakeFiles/rock.dir/ipc.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/ipc.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/ipc.cc > CMakeFiles/rock.dir/ipc.cc.i
+
+CMakeFiles/rock.dir/ipc.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/ipc.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/ipc.cc -o CMakeFiles/rock.dir/ipc.cc.s
+
+CMakeFiles/rock.dir/ipc.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/ipc.cc.o.requires
+
+CMakeFiles/rock.dir/ipc.cc.o.provides: CMakeFiles/rock.dir/ipc.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/ipc.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/ipc.cc.o.provides
+
+CMakeFiles/rock.dir/ipc.cc.o.provides.build: CMakeFiles/rock.dir/ipc.cc.o
+
+
+CMakeFiles/rock.dir/tasktracker.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/tasktracker.cc.o: ../tasktracker.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/rock.dir/tasktracker.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/tasktracker.cc.o -c /root/Rock/tasktracker.cc
+
+CMakeFiles/rock.dir/tasktracker.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/tasktracker.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/tasktracker.cc > CMakeFiles/rock.dir/tasktracker.cc.i
+
+CMakeFiles/rock.dir/tasktracker.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/tasktracker.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/tasktracker.cc -o CMakeFiles/rock.dir/tasktracker.cc.s
+
+CMakeFiles/rock.dir/tasktracker.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/tasktracker.cc.o.requires
+
+CMakeFiles/rock.dir/tasktracker.cc.o.provides: CMakeFiles/rock.dir/tasktracker.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/tasktracker.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/tasktracker.cc.o.provides
+
+CMakeFiles/rock.dir/tasktracker.cc.o.provides.build: CMakeFiles/rock.dir/tasktracker.cc.o
+
+
+CMakeFiles/rock.dir/proxyD.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/proxyD.cc.o: ../proxyD.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/rock.dir/proxyD.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/proxyD.cc.o -c /root/Rock/proxyD.cc
+
+CMakeFiles/rock.dir/proxyD.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/proxyD.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/proxyD.cc > CMakeFiles/rock.dir/proxyD.cc.i
+
+CMakeFiles/rock.dir/proxyD.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/proxyD.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/proxyD.cc -o CMakeFiles/rock.dir/proxyD.cc.s
+
+CMakeFiles/rock.dir/proxyD.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/proxyD.cc.o.requires
+
+CMakeFiles/rock.dir/proxyD.cc.o.provides: CMakeFiles/rock.dir/proxyD.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/proxyD.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/proxyD.cc.o.provides
+
+CMakeFiles/rock.dir/proxyD.cc.o.provides.build: CMakeFiles/rock.dir/proxyD.cc.o
+
+
+CMakeFiles/rock.dir/queues.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/queues.cc.o: ../queues.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/rock.dir/queues.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/queues.cc.o -c /root/Rock/queues.cc
+
+CMakeFiles/rock.dir/queues.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/queues.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/queues.cc > CMakeFiles/rock.dir/queues.cc.i
+
+CMakeFiles/rock.dir/queues.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/queues.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/queues.cc -o CMakeFiles/rock.dir/queues.cc.s
+
+CMakeFiles/rock.dir/queues.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/queues.cc.o.requires
+
+CMakeFiles/rock.dir/queues.cc.o.provides: CMakeFiles/rock.dir/queues.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/queues.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/queues.cc.o.provides
+
+CMakeFiles/rock.dir/queues.cc.o.provides.build: CMakeFiles/rock.dir/queues.cc.o
+
+
+CMakeFiles/rock.dir/poller.cc.o: CMakeFiles/rock.dir/flags.make
+CMakeFiles/rock.dir/poller.cc.o: ../poller.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/rock.dir/poller.cc.o"
+	/usr/lib64/ccache/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/rock.dir/poller.cc.o -c /root/Rock/poller.cc
+
+CMakeFiles/rock.dir/poller.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rock.dir/poller.cc.i"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Rock/poller.cc > CMakeFiles/rock.dir/poller.cc.i
+
+CMakeFiles/rock.dir/poller.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rock.dir/poller.cc.s"
+	/usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Rock/poller.cc -o CMakeFiles/rock.dir/poller.cc.s
+
+CMakeFiles/rock.dir/poller.cc.o.requires:
+
+.PHONY : CMakeFiles/rock.dir/poller.cc.o.requires
+
+CMakeFiles/rock.dir/poller.cc.o.provides: CMakeFiles/rock.dir/poller.cc.o.requires
+	$(MAKE) -f CMakeFiles/rock.dir/build.make CMakeFiles/rock.dir/poller.cc.o.provides.build
+.PHONY : CMakeFiles/rock.dir/poller.cc.o.provides
+
+CMakeFiles/rock.dir/poller.cc.o.provides.build: CMakeFiles/rock.dir/poller.cc.o
+
+
 # Object files for target rock
 rock_OBJECTS = \
-"CMakeFiles/rock.dir/ab.cc.o"
+"CMakeFiles/rock.dir/ab.cc.o" \
+"CMakeFiles/rock.dir/event.cc.o" \
+"CMakeFiles/rock.dir/ipc.cc.o" \
+"CMakeFiles/rock.dir/tasktracker.cc.o" \
+"CMakeFiles/rock.dir/proxyD.cc.o" \
+"CMakeFiles/rock.dir/queues.cc.o" \
+"CMakeFiles/rock.dir/poller.cc.o"
 
 # External object files for target rock
 rock_EXTERNAL_OBJECTS =
 
 librock.a: CMakeFiles/rock.dir/ab.cc.o
+librock.a: CMakeFiles/rock.dir/event.cc.o
+librock.a: CMakeFiles/rock.dir/ipc.cc.o
+librock.a: CMakeFiles/rock.dir/tasktracker.cc.o
+librock.a: CMakeFiles/rock.dir/proxyD.cc.o
+librock.a: CMakeFiles/rock.dir/queues.cc.o
+librock.a: CMakeFiles/rock.dir/poller.cc.o
 librock.a: CMakeFiles/rock.dir/build.make
 librock.a: CMakeFiles/rock.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wangzhi/spear/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library librock.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/Rock/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library librock.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/rock.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rock.dir/link.txt --verbose=$(VERBOSE)
 
@@ -101,6 +257,12 @@ CMakeFiles/rock.dir/build: librock.a
 .PHONY : CMakeFiles/rock.dir/build
 
 CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/ab.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/event.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/ipc.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/tasktracker.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/proxyD.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/queues.cc.o.requires
+CMakeFiles/rock.dir/requires: CMakeFiles/rock.dir/poller.cc.o.requires
 
 .PHONY : CMakeFiles/rock.dir/requires
 
@@ -109,6 +271,6 @@ CMakeFiles/rock.dir/clean:
 .PHONY : CMakeFiles/rock.dir/clean
 
 CMakeFiles/rock.dir/depend:
-	cd /home/wangzhi/spear/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/wangzhi/spear /home/wangzhi/spear /home/wangzhi/spear/build /home/wangzhi/spear/build /home/wangzhi/spear/build/CMakeFiles/rock.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Rock/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Rock /root/Rock /root/Rock/build /root/Rock/build /root/Rock/build/CMakeFiles/rock.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/rock.dir/depend
 
